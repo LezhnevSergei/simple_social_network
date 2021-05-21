@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'posts',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,9 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-       'rest_framework.permissions.AllowAny',
-    ]
+       'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
