@@ -10,5 +10,5 @@ posts.register(r'like', PostLikeViewSet, basename='like')
 
 
 urlpatterns = [
-    path('', include(posts.urls)),
+    path('', include(posts.urls))
 ]

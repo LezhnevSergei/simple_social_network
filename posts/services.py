@@ -3,7 +3,6 @@ from typing import List, Optional
 from rest_framework.exceptions import APIException
 
 from posts.models import Post, PostLike
-from posts.serializers import PostSerializer
 
 
 def create_post(creator_id: int, text: str) -> Post:
@@ -51,8 +50,6 @@ def get_post(post_id: int, current_user_id: int) -> dict:
         "count_likes": post_data.postlike_set.count(),
         "is_liked": post_data.get_is_liked(user_id=current_user_id)
     }
-
-    post = PostSerializer(post)
 
     return post
 
