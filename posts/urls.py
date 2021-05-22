@@ -1,14 +1,10 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 
 from posts.views import PostViewSet, PostLikeViewSet
 
 
-posts = routers.DefaultRouter()
-posts.register(r'', PostViewSet, basename='posts')
-posts.register(r'like', PostLikeViewSet, basename='like')
-
-
 urlpatterns = [
-    path('', include(posts.urls))
+    path('', PostViewSet.as_view({'get': 'list', 'post': 'create', 'delete': 'destroy'}), name='posts'),
+    path('<int:post_id>/', PostViewSet.as_view({'get': 'retrieve'}), name='post'),
+    path('like/', PostLikeViewSet.as_view({'post': 'create'}), name='like'),
 ]

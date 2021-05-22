@@ -13,6 +13,7 @@ class AnalyticsUserRequestsMiddleware:
         response = self._get_response(request)
         if request.headers.get("Authorization"):
             token_row = request.headers.get("Authorization").split()[1]
+            print(token_row)
             token = AccessToken(token_row)
             payload = token.payload
             user_id = payload.get("user_id")

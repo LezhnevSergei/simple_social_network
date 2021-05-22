@@ -7,8 +7,8 @@ from posts.services import create_post, get_posts, get_post, do_like, do_unlike,
 
 
 class PostViewSet(viewsets.ViewSet):
-    def retrieve(self, request, pk: int, *args, **kwargs):
-        post = get_post(post_id=pk, current_user_id=request.user.id)
+    def retrieve(self, request, post_id: int, *args, **kwargs):
+        post = get_post(post_id=post_id, current_user_id=request.user.id)
         serializer = PostSerializer(post)
 
         return Response(serializer.data)
