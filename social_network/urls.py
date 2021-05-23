@@ -5,7 +5,7 @@ from users.views import RegisterApi
 
 
 urlpatterns = [
-    path('api/v1/posts/', include('posts.urls')),
+    path('api/v1/posts/', include('posts.urls'), name='posts'),
 
     path('api/v1/users/', include('users.urls')),
 

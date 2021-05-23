@@ -6,14 +6,14 @@ from django.contrib.auth.models import User
 from posts.models import PostLike
 
 
-def get_analytics_likes_on_period(gte: date, lte: date) -> Dict[str, int]:
+def get_analytics_likes_on_period(gte: str, lte: str) -> Dict[str, int]:
     likes = PostLike.objects.filter(created_at__gte=gte, created_at__lte=lte)
     analytics_likes_by_date = _count_likes_by_created_at(likes)
 
     return analytics_likes_by_date
 
 
-def get_analytics_likes_on_period_by_user(user_id: int, gte: date, lte: date) -> Dict[str, int]:
+def get_analytics_likes_on_period_by_user(user_id: int, gte: str, lte: str) -> Dict[str, int]:
     likes = PostLike.objects.filter(creator_id=user_id, created_at__gte=gte, created_at__lte=lte)
     analytics_likes_by_date = _count_likes_by_created_at(likes)
 
