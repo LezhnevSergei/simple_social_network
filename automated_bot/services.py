@@ -4,6 +4,10 @@ import random
 import requests
 
 
+PORT = 8000
+BASE_API = f"http://localhost:{PORT}/api/v1/"
+
+
 def users_register_login_create_posts(count_users, max_count_posts):
     users_state = {}
 
@@ -52,7 +56,7 @@ def _user_register(username: str, password: str) -> dict:
     new_user_data = {'username': username, 'password': password}
     headers = {'Content-type': 'application/json'}
     response = requests.post(
-        'http://localhost:1337/api/v1/auth/register/',
+        f'{BASE_API}auth/register/',
         json.dumps(new_user_data),
         headers=headers
     )
@@ -64,7 +68,7 @@ def _user_login(username: str, password: str) -> dict:
     user_data = {'username': username, 'password': password}
     headers = {'Content-type': 'application/json'}
     response = requests.post(
-        'http://localhost:1337/api/v1/auth/login/',
+        f'{BASE_API}auth/login/',
         json.dumps(user_data),
         headers=headers
     )
@@ -75,7 +79,7 @@ def _user_login(username: str, password: str) -> dict:
 def _get_posts(access_token: str) -> dict:
     headers = {'Content-type': 'application/json', 'Authorization': 'Bearer ' + access_token}
     response = requests.get(
-        f'http://localhost:1337/api/v1/posts/',
+        f'{BASE_API}posts/',
         headers=headers
     )
 
@@ -86,7 +90,7 @@ def _create_post(post_content: str, access_token: str) -> dict:
     headers = {'Content-type': 'application/json', 'Authorization': 'Bearer ' + access_token}
     post = {'text': post_content}
     response = requests.post(
-        f'http://localhost:1337/api/v1/posts/',
+        f'{BASE_API}posts/',
         json=post,
         headers=headers
     )
@@ -97,7 +101,7 @@ def _create_post(post_content: str, access_token: str) -> dict:
 def _get_post(post_id: int, access_token: str) -> dict:
     headers = {'Content-type': 'application/json', 'Authorization': 'Bearer ' + access_token}
     response = requests.get(
-        f'http://localhost:1337/api/v1/posts/{post_id}',
+        f'{BASE_API}posts/{post_id}',
         headers=headers
     )
 
@@ -107,7 +111,7 @@ def _get_post(post_id: int, access_token: str) -> dict:
 def _like_post(post_id: int, access_token: str) -> dict:
     headers = {'Content-type': 'application/json', 'Authorization': 'Bearer ' + access_token}
     response = requests.post(
-        f'http://localhost:1337/api/v1/posts/like/?do_act=like',
+        f'{BASE_API}posts/like/?do_act=like',
         json={'post_id': post_id},
         headers=headers
     )
@@ -118,7 +122,7 @@ def _like_post(post_id: int, access_token: str) -> dict:
 def _unlike_post(post_id: int, access_token: str) -> dict:
     headers = {'Content-type': 'application/json', 'Authorization': 'Bearer ' + access_token}
     response = requests.post(
-        f'http://localhost:1337/api/v1/posts/like/?do_act=unlike',
+        f'{BASE_API}posts/like/?do_act=unlike',
         json={'post_id': post_id},
         headers=headers
     )
